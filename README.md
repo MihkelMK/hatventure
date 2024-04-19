@@ -32,3 +32,4 @@ WIP
 - Give DM possibility of adding either outcome seperately
 - Archive page for players
 - Get feedback from DMs and players, prolly lots of small things need fixin'
+- Add feedback to form errors

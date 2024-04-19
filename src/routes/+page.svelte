@@ -3,8 +3,6 @@
 
 	export let data: PageData;
 	export let form: ActionData;
-
-	$: console.log(data);
 </script>
 
 {#if data.encounter}

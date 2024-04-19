@@ -16,7 +16,6 @@
 
 	const archived = inactive.filter((encounter) => encounter.archived);
 	const current = inactive.filter((encounter) => !encounter.archived);
-	$: console.log(form);
 </script>
 
 {#if form && form.activeExists}

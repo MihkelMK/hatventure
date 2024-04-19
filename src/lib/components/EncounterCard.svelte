@@ -17,7 +17,6 @@
   const selectedOutcome =
     data.outcomes?.filter((outcome) => outcome.selected)?.at(0) || undefined;
   const otherOutcomes = data.outcomes?.filter((outcome) => !outcome.selected);
-  console.log(selectedOutcome);
 
   let randomPick: Outcome | undefined;
 
@@ -68,7 +67,9 @@
     {#if data.outcomes && data.outcomes.length > 0}
       {#if editView}
         {#if !selectedOutcome}
-          <p style="text-align:center">Outcome not yet selected</p>
+          <p style="width:fit-content; margin-inline: auto;">
+            Outcome not yet selected
+          </p>
           <button
             style="margin-inline: auto; display: block;"
             on:click={() => pickOutcome()}
