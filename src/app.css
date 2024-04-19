@@ -1,0 +1,85 @@
+* {
+  --pico-error-background: #B02A0C;
+  --pico-error-border: #B02A0C;
+  --pico-error-hover-background: #BA2D0D;
+  --pico-error-hover-border: #BA2D0D;
+  --pico-error-inverse: #FFF;
+
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).destructive {
+  --pico-background-color: var(--pico-error-background);
+  --pico-border-color: var(--pico-error-border);
+  --pico-color: var(--pico-error-inverse);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon:is([aria-current]:not([aria-current="false"]), :hover, :active, :focus) {
+  --pico-background-color: var(--pico-error-hover-background);
+  --pico-border-color: var(--pico-error-hover-border);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-primary-background);
+
+  width: initial;
+  margin-bottom: 0;
+  padding: 0 var(--pico-spacing);
+  font-size: 1.5em;
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon.secondary {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-secondary-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon.contrast {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-contrast-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).destructive {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-error-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon:is([aria-current]:not([aria-current="false"]), :hover, :active, :focus) {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-primary-hover-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon.secondary:is([aria-current]:not([aria-current="false"]), :hover, :active, :focus) {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-secondary-hover-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon.contrast:is([aria-current]:not([aria-current="false"]), :hover, :active, :focus) {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-contrast-hover-background);
+}
+
+:is(button, [type="submit"], [type="button"], [role="button"]).icon.destructive:is([aria-current]:not([aria-current="false"]), :hover, :active, :focus) {
+  --pico-background-color: transparent;
+  --pico-border-color: transparent;
+  --pico-color: var(--pico-error-hover-background);
+}
+
+
+iconify-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+}
+
+p,
+td {
+  max-width: 60ch;
+  line-height: 1.55em;
+}

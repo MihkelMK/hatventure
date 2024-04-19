@@ -1,17 +1,53 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  content   String
-  createdAt DateTime @default(now())
+model Outcome {
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  content     String
+  type        OutcomeType
+  selected    Boolean     @default(false)
+  encounter   Encounter   @relation(fields: [encounterId], references: [id])
+  encounterId Int
+
+  @@map("outcomes")
+}
+
+enum OutcomeType {
+  POSITIVE
+  NEGATIVE
+}
+
+model Encounter {
+  id            Int       @id @default(autoincrement())
+  createdAt     DateTime  @default(now())
+  publishedAt   DateTime?
+  name          String    @unique
+  outcomes      Outcome[]
+  published     Boolean   @default(false)
+  active        Boolean   @default(false)
+  archived      Boolean   @default(false)
+  statsPublic   Boolean   @default(false)
+  outcomePublic Boolean   @default(false)
+  choicesPublic Boolean   @default(false)
+
+  @@map("encounters")
+}
+
+model User {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+  role Role   @default(PLAYER)
+}
+
+enum Role {
+  PLAYER
+  DM
 }

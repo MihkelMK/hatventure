@@ -26,6 +26,7 @@ jspm_packages
 
 # Environment files
 .dot
+.env
 
 # Editor and other files
 .idea
@@ -36,6 +37,10 @@ internal
 .eslintcache
 .svelte-kit
 
-# prisma DB data
+# Prisma data
 prisma/*.db
 prisma/migrations/
+
+# DB data
+db-data/
+pgadmin-data/

@@ -1,24 +1,40 @@
-<h1>Random encounter builder</h1>
+<script lang="ts">
+	import type { PageData, ActionData } from "./$types";
 
-<form method="POST">
-	<label for="good"
-		>Good outcome
-		<textarea name="good" id="good" required></textarea>
-	</label>
-	<label for="bad">
-		Bad outcome
+	export let data: PageData;
+	export let form: ActionData;
 
-		<textarea name="bad" id="bad" required></textarea>
-	</label>
-	<button type="submit">Submit</button>
-</form>
+	$: console.log(data);
+</script>
+
+{#if data.encounter}
+	<hgroup>
+		<h2>Submit outcomes for {data.encounter.name}</h2>
+		<h3>Both positive and negative are required.</h3>
+	</hgroup>
+
+	<form method="POST">
+		<input type="hidden" name="id" id="id" value={data.encounter.id} />
+		<label for="good">
+			Positive outcome
+
+			<textarea name="positive" id="positive" required></textarea>
+		</label>
+		<label for="bad">
+			Negative outcome
+
+			<textarea name="negative" id="negative" required></textarea>
+		</label>
+		<button type="submit">Submit</button>
+	</form>
+{:else}
+	<hgroup>
+		<h2>No incoming encounters</h2>
+		<h3>As far as the players know.</h3>
+	</hgroup>
+{/if}
 
 <style>
-	h1 {
-		margin-bottom: 4rem;
-		text-align: center;
-	}
-
 	form {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
@@ -27,5 +43,9 @@
 
 	button {
 		grid-column: span 2;
+	}
+
+	hgroup {
+		margin-bottom: 4rem;
 	}
 </style>

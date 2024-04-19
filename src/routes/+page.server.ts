@@ -2,28 +2,48 @@ import prisma from '$lib/prisma';
 
 import { fail, redirect } from '@sveltejs/kit';
 
-import type { Actions } from './$types';
+import type { Actions, PageServerLoad } from './$types';
+
+export const load = (async () => {
+  try {
+    const response = await prisma.encounter.findFirst({ where: { active: true }, select: { id: true, name: true } });
+
+    return { encounter: response };
+
+  } catch (error) {
+
+    return { encounter: undefined }
+  }
+}) satisfies PageServerLoad;
+
 
 export const actions = {
   default: async ({ request }) => {
     const data = await request.formData();
 
-    const good = data.get('good');
-    const bad = data.get('bad');
+    const id = data.get("id")
+    const positive = data.get('positive');
+    const negative = data.get('negative');
 
-    if (!good || !bad) {
-      return fail(400, { good, bad, missing: true });
+    if (!id || !positive || !negative) {
+      return fail(400, { id, positive, negative, missing: true });
     }
 
-    if (typeof good != 'string' || typeof bad != 'string') {
+    if (typeof positive != 'string' || typeof negative != 'string') {
       return fail(400, { incorrect: true });
     }
 
-    const content = `${good} \n ${bad}`;
-
-    await prisma.post.create({
+    await prisma.encounter.update({
+      where: {
+        id: Number(id)
+      },
       data: {
-        content
+        outcomes: {
+          create: [
+            { content: positive, type: "POSITIVE" },
+            { content: negative, type: "NEGATIVE" }
+          ]
+        }
       }
     });
 
